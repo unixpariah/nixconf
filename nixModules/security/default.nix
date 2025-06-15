@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   imports = [
     ./root
     ./yubikey

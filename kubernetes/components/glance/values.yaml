@@ -37,8 +37,8 @@ common:
                         widgets:
                           - type: dns-stats
                             service: pihole
-                            url: https://pihole.your-domain.com
-                            token: 12345abcdefghijk
+                            url: http://pihole-web.pihole-system.svc.cluster.local:80
+                            token: 19d8aacc17974b9767bba29e6c2409e989ad6485d11385b72e8cb7dd720dc766
                           - type: custom-api
                             title: Immich stats
                             cache: 1d
@@ -107,10 +107,6 @@ common:
                                 url: https://warden.your-domain.com
                                 check-url: http://vaultwarden.vaultwarden.svc.cluster.local:80/
                                 icon: di:vaultwarden-light
-                              - title: NGINX Proxy Manager
-                                url: https://proxy.hopki.net/
-                                check-url: http://10.0.0.102:81
-                                icon: di:nginx
                               - title: Jellyfin
                                 url: https://jellyfin.hopki.net/
                                 check-url: http://10.0.0.100:8096
@@ -119,6 +115,10 @@ common:
                                 url: https://grafana.your-domain.com
                                 check-url: http://grafana.monitoring.svc.cluster.local:3000
                                 icon: di:grafana
+                              - title: atuin
+                                url: https://atuin.your-domain.com
+                                check-url: http://atuin.atuin.svc.cluster.local:8888
+                                icon: di:atuin
                 
                           - type: monitor
                             cache: 1m

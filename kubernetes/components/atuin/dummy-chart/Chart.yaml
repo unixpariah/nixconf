@@ -1,0 +1,5 @@
+apiVersion: v2
+name: dummy
+description: Dummy chart for kustomize wrapper
+version: 0.1.0
+appVersion: 1.0.0

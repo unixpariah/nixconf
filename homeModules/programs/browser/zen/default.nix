@@ -99,6 +99,7 @@ in
             darkreader
             vimium
             youtube-shorts-block
+            bitwarden
           ];
           settings = {
             "uBlock0@raymondhill.net".settings = {

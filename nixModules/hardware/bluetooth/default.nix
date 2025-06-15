@@ -4,10 +4,21 @@
   system_type,
   ...
 }:
+let
+  cfg = config.hardware.bluetooth;
+in
 {
-  hardware.bluetooth.enable = lib.mkDefault (system_type == "desktop");
+  hardware.bluetooth = {
+    enable = lib.mkDefault (system_type == "desktop");
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
 
-  environment.persist.directories = lib.mkIf config.hardware.bluetooth.enable [
-    "/var/lib/bluetooth"
-  ];
+  services.blueman.enable = cfg.enable;
+
+  environment.persist.directories = lib.mkIf cfg.enable [ "/var/lib/bluetooth" ];
 }

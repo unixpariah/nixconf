@@ -17,5 +17,6 @@
     ./browser
     ./starship
     ./fastfetch
+    ./atuin
   ];
 }

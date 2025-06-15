@@ -209,14 +209,11 @@ timeZone: ""
 
 orgGroupsEnabled: "false"
 
-
 yubico:
-  clientId: ""
-  existingSecret: ""
+  clientId: "112701"
+  existingSecret: "yubisecret"
   secretKey:
-    value: ""
-    existingSecretKey: ""
-  server: ""
+    existingSecretKey: "YUBI"
 
 duo:
   iKey: ""

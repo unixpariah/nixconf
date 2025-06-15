@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- kustomize/namespace.yaml
+- kustomize/atuin/deployment.yaml
+- kustomize/atuin/service.yaml
+- kustomize/atuin/pvc.yaml
+- kustomize/atuin/ingress.yaml
+- kustomize/db/deployment.yaml
+- kustomize/db/service.yaml
+- kustomize/db/pvc.yaml
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/managed-by: Kustomize

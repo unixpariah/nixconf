@@ -13,7 +13,7 @@ metadata:
 spec:
   secretName: ssl-cert
   issuerRef:
-    name: letsencrypt
+    name: selfsigned-issuer
     kind: ClusterIssuer
   commonName: "*.your-domain.com"
   dnsNames:

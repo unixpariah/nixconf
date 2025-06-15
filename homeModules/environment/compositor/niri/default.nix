@@ -277,27 +277,27 @@
 
       binds = {
         "XF86MonBrightnessUp".action.spawn = [
-          "brightnessctl"
+          "${pkgs.brightnessctl}/bin/brightnessctl"
           "set"
           "+5%"
         ];
         "XF86MonBrightnessDown".action.spawn = [
-          "brightnessctl"
+          "${pkgs.brightnessctl}/bin/brightnessctl"
           "set"
           "5%-"
         ];
         "XF86AudioRaiseVolume".action.spawn = [
-          "pamixer"
+          "${pkgs.pamixer}/bin/pamixer"
           "-i"
           "5"
         ];
         "XF86AudioLowerVolume".action.spawn = [
-          "pamixer"
+          "${pkgs.pamixer}/bin/pamixer"
           "-d"
           "5"
         ];
         "XF86AudioMute".action.spawn = [
-          "pamixer"
+          "${pkgs.pamixer}/bin/pamixer"
           "-t"
         ];
         "Print".action.spawn = [

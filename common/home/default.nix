@@ -1,5 +1,13 @@
 { ... }:
 {
+  programs.atuin = {
+    enable = true;
+    settings = {
+      auto_sync = true;
+      sync_address = "http://atuin.your-domain.com";
+    };
+  };
+
   services.syncthing = {
     enable = true;
     settings = {

@@ -30,3 +30,5 @@ admin:
   existingSecret: "pihole-password"
   passwordKey: "password"
   annotations: {}
+adlists:
+  - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt

@@ -1,0 +1,12 @@
+releases:
+  - name: atuin-kustomize
+    namespace: atuin
+    createNamespace: true
+    chart: ./dummy-chart
+    hooks:
+     - events: ["postapply"]
+       command: sh
+       args:
+         - -c
+         - "kubectl apply -k ."
+

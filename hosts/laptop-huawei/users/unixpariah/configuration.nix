@@ -1,7 +1,9 @@
 { pkgs, config, ... }:
 {
   sops.secrets = {
+    #"yubico/u2f_keys".path = "/home/unixpariah/.config/Yubico/u2f_keys";
     github-api = { };
+    "ssh_keys/id_yubikey".path = "/home/unixpariah/.ssh/id_yubikey";
   };
 
   programs = {

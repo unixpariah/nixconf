@@ -21,6 +21,12 @@
     "immich-postgres-user/DB_PASSWORD" = { };
     "immich-postgres-user/username" = { };
     "immich-postgres-user/password" = { };
+
+    "atuin/DB_USERNAME" = { };
+    "atuin/DB_PASSWORD" = { };
+    "atuin/DB_URI" = { };
+
+    YUBI = { };
   };
 
   system = {
@@ -45,6 +51,20 @@
   users.users.unixpariah.extraGroups = [ "podman" ];
 
   services = {
+    #cloudflared = {
+    #  enable = true;
+    #  tunnels = {
+    #    "00000000-0000-0000-0000-000000000000" = {
+    #      credentialsFile = "/tmp/test";
+    #      default = "http_status:404";
+    #      ingress = {
+    #        "*.your-domain.com" = {
+    #          service = "http://localhost:80";
+    #        };
+    #      };
+    #    };
+    #  };
+    #};
     impermanence.enable = true;
     tailscale.authKeyFile = config.sops.secrets.tailscale.path;
     k3s = {
@@ -79,6 +99,20 @@
             DB_PASSWORD = config.sops.secrets."immich-postgres-user/DB_PASSWORD".path;
             username = config.sops.secrets."immich-postgres-user/username".path;
             password = config.sops.secrets."immich-postgres-user/password".path;
+          };
+        }
+        {
+          name = "yubisecret";
+          namespace = "vaultwarden";
+          data.YUBI = config.sops.secrets.YUBI.path;
+        }
+        {
+          name = "atuin-secrets";
+          namespace = "atuin";
+          data = {
+            ATUIN_DB_USERNAME = config.sops.secrets."atuin/DB_USERNAME".path;
+            ATUIN_DB_PASSWORD = config.sops.secrets."atuin/DB_PASSWORD".path;
+            ATUIN_DB_URI = config.sops.secrets."atuin/DB_URI".path;
           };
         }
       ];

@@ -120,7 +120,6 @@
       zathura
       mpv
       lazygit
-      brightnessctl
       unzip
       gimp3
       imagemagick

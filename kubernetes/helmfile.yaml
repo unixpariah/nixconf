@@ -8,5 +8,6 @@ helmfiles:
   - path: components/pihole/helmfile.yaml
   - path: components/cert-manager/helmfile.yaml
   - path: components/vaultwarden/helmfile.yaml
+  - path: components/atuin/helmfile.yaml
   #- path: components/immich/helmfile.yaml
   #- path: components/nextcloud/helmfile.yaml

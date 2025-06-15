@@ -30,9 +30,6 @@ in
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      pavucontrol
-      pamixer
-    ];
+    environment.systemPackages = with pkgs; [ pavucontrol ];
   };
 }
