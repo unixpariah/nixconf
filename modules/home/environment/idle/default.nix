@@ -33,21 +33,33 @@ in
         };
         listeners = [
           {
+            conditions = [ { usb_unplugged = "1050:0407"; } ];
+            timeout = 5;
+            on_timeout = "${pkgs.libnotify}/bin/notify-send aha mhm";
+          }
+          {
             conditions = [
               "on_battery"
               { battery_level = "critical"; }
               { battery_state = "discharging"; }
+              { usb_unplugged = "1050:0407"; }
             ];
             timeout = 300;
             on_timeout = "${pkgs.systemd}/bin/systemctl suspend";
           }
           {
-            conditions = [ "on_ac" ];
+            conditions = [
+              "on_ac"
+              { usb_unplugged = "1050:0407"; }
+            ];
             timeout = 300;
             on_timeout = "${pkgs.systemd}/bin/loginctl lock-session";
           }
           {
-            conditions = [ "on_ac" ];
+            conditions = [
+              "on_ac"
+              { usb_unplugged = "1050:0407"; }
+            ];
             timeout = 900;
             on_timeout = "${pkgs.systemd}/bin/systemctl suspend";
           }

@@ -23,6 +23,7 @@ inputs: config: [
       sysnotifier = inputs.sysnotifier.packages.${system}.default;
       helix = inputs.helix-steel.packages.${system}.default;
       waybar = inputs.waybar.packages.${system}.default;
+      sccache = prev.callPackage ./sccache { };
       inherit (inputs.hyprland.packages.${system}) hyprland;
       inherit (inputs.hyprland.packages.${system}) xdg-desktop-portal-hyprland;
     }

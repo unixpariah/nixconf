@@ -68,6 +68,7 @@
   ];
 
   services = {
+    sccache.enable = true;
     impermanence.enable = true;
     yubikey-touch-detector.enable = true;
   };

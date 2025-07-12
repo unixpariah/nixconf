@@ -62,7 +62,8 @@ in
 
     wantedBy = [ "sysinit.target" ];
     after = [ "systemd-sysusers.service" ];
-    before = [ "sops-install-secrets.service" ];
+    before = [ "activate-home-manager.service" ];
+    requiredBy = [ "activate-home-manager.service" ];
     unitConfig.DefaultDependencies = "no";
 
     serviceConfig = {

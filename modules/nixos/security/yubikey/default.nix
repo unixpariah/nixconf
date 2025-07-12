@@ -27,7 +27,7 @@ in
         enable = lib.mkEnableOption "Action when plugging in";
         action = lib.mkOption {
           type = lib.types.str;
-          default = "${pkgs.pam_u2f}/bin/pamu2fcfg -n && ${pkgs.systemd}/bin/loginctl unlock-sessions";
+          default = "${pkgs.procps}/bin/pidof hyprlock && ${pkgs.pam_u2f}/bin/pamu2fcfg -n && ${pkgs.systemd}/bin/loginctl unlock-sessions";
         };
       };
     };

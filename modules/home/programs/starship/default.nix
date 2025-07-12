@@ -17,6 +17,8 @@ _: {
         "$git_state"
         "$git_metrics"
         "$git_status"
+        "$jj"
+        "$jjstate"
         "$hg_branch"
         "$docker_context"
         "$package"
@@ -99,10 +101,36 @@ _: {
       nix_shell = {
         format = "via [$symbol$state]($style) ";
       };
-      custom.mob = {
-        command = "echo $MOB_TIMER_ROOM";
-        format = "[ ($output)]($style) ";
-        when = "[[ -v MOB_TIMER_ROOM ]]";
+      custom = {
+        mob = {
+          command = "echo $MOB_TIMER_ROOM";
+          format = "[ ($output)]($style) ";
+          when = "[[ -v MOB_TIMER_ROOM ]]";
+        };
+        jj = {
+          command = ''
+            jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T '
+              separate(" ",
+                bookmarks.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+                tags.map(|x| truncate_end(10, x.name(), "…")).join(" "),
+                surround("\"", "\"", truncate_end(24, description.first_line(), "…")),
+                if(conflict, "conflict"),
+                if(divergent, "divergent"),
+                if(hidden, "hidden"),
+              )
+            '
+          '';
+          when = "jj root";
+          symbol = " jj ";
+          format = "[$symbol$output]($style) ";
+        };
+        jjstate = {
+          when = "jj root";
+          command = ''
+            jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ''${1}m ''${2}+ ''${3}-' | sd " 0." ""
+          '';
+          format = "[$output]($style) ";
+        };
       };
       aws.symbol = " ";
       conda.symbol = " ";
