@@ -52,6 +52,23 @@ in
               )
             );
           };
+
+          # For terraform module
+          needsInstall = lib.mkOption {
+            type = types.nullOr (
+              types.submodule {
+                options = {
+                  ip = lib.mkOption {
+                    type = types.str;
+                  };
+                  sshKeyFile = lib.mkOption {
+                    type = types.path;
+                  };
+                };
+              }
+            );
+            default = null;
+          };
         };
       }
     );

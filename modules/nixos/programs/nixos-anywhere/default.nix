@@ -46,12 +46,11 @@ in
     nix.settings.trusted-users = [ "nixos-anywhere" ];
 
     programs.ssh.extraConfig = lib.mkIf (cfg.sshKeyFile != null) ''
-      Host *
-        Match User nixos-anywhere
-          IdentityFile ${cfg.sshKeyFile}
-          IdentitiesOnly yes
-          StrictHostKeyChecking no
-          UserKnownHostsFile /dev/null
+      Match User nixos-anywhere
+        IdentityFile ${cfg.sshKeyFile}
+        IdentitiesOnly yes
+        StrictHostKeyChecking no
+        UserKnownHostsFile /dev/null
     '';
   };
 }

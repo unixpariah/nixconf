@@ -1,10 +1,10 @@
 # --- all hosts and whether they need fresh install ---
 locals {
   hosts = {
-    "agent-0" = {
-      hostname      = "agent-0"
-      needs_install = false
-    }
+    #"agent-0" = {
+    #  hostname      = "agent-0"
+    #  needs_install = false
+    #}
     "laptop" = {
       hostname      = "laptop"
       needs_install = false

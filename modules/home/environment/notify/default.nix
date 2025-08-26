@@ -67,10 +67,10 @@ in
       };
     };
 
-    nix.settings = {
-      substituters = [ "https://moxnotify.cachix.org" ];
-      trusted-substituters = [ "https://moxnotify.cachix.org" ];
-      trusted-public-keys = [ "moxnotify.cachix.org-1:YVtjC6ZS1as13P1zHHVi/p3bx93tGsP2mUjzEn3T4X4=" ];
-    };
+    #nix.settings = {
+    #  substituters = [ "https://moxnotify.cachix.org" ];
+    #  trusted-substituters = [ "https://moxnotify.cachix.org" ];
+    #  trusted-public-keys = [ "moxnotify.cachix.org-1:YVtjC6ZS1as13P1zHHVi/p3bx93tGsP2mUjzEn3T4X4=" ];
+    #};
   };
 }

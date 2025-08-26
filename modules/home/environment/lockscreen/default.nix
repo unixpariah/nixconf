@@ -22,9 +22,9 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.hyprlock = {
-      enable = true;
+      inherit (cfg) enable;
       inherit (cfg) package;
       settings = {
         general.hide_cursor = true;

@@ -19,15 +19,15 @@
       "steam-unwrapped"
     ];
 
-  #sops.secrets = {
-  #  nixos-anywhere = {
-  #    owner = "nixos-anywhere";
-  #    group = "nixos-anywhere";
-  #    mode = "0440";
-  #  };
-  #};
+  sops.secrets = {
+    nixos-anywhere = {
+      owner = "nixos-anywhere";
+      group = "nixos-anywhere";
+      mode = "0400";
+    };
+  };
 
-  #programs.nixos-anywhere.sshKeyFile = config.sops.secrets.nixos-anywhere.path;
+  programs.nixos-anywhere.sshKeyFile = config.sops.secrets.nixos-anywhere.path;
 
   documentation.enable = true;
 
@@ -38,7 +38,6 @@
 
   programs = {
     thunderbird.enable = true;
-    nix-index.enable = true;
     wshowkeys.enable = true;
   };
 
