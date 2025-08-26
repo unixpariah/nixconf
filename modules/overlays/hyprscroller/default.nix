@@ -1,11 +1,15 @@
 {
-  stdenv,
-  fetchFromGitHub,
+  lib,
+  hyprlandPlugins,
   hyprland,
+  cmake,
+  fetchFromGitHub,
+  nix-update-script,
 }:
-stdenv.mkDerivation (finalAttrs: {
-  name = "hyprscroller";
-  pname = finalAttrs.name;
+hyprlandPlugins.mkHyprlandPlugin hyprland {
+  pluginName = "hyprscroller";
+  version = "0-unstable-2025-03-24";
+
   src = fetchFromGitHub {
     owner = "cpiber";
     repo = "hyprscroller";
@@ -13,21 +17,24 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-XqUm5nnTmZUF17eqEACzQCAWXF7ezLKHqIwJR/td34Y=";
   };
 
-  inherit (hyprland) buildInputs;
-  nativeBuildInputs = hyprland.nativeBuildInputs ++ [ hyprland ];
-
-  dontUseCmakeConfigure = true;
-  dontUseMesonConfigure = true;
-  dontUseNinjaBuild = true;
-  dontUseNinjaInstall = true;
-
-  buildPhase = ''
-    cmake -B ./Release -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=$(PREFIX)
-    cmake --build ./Release -j
-  '';
+  nativeBuildInputs = [ cmake ];
 
   installPhase = ''
-    mkdir -p "$out/lib"
-    cp -r ./Release/hyprscroller.so "$out/lib/lib${finalAttrs.name}.so"
+    runHook preInstall
+
+    mkdir -p $out/lib
+    mv hyprscroller.so $out/lib/libhyprscroller.so
+
+    runHook postInstall
   '';
-})
+
+  passthru.updateScript = nix-update-script { extraArgs = [ "--version=branch" ]; };
+
+  meta = {
+    homepage = "https://github.com/dawsers/hyprscroller";
+    description = "Hyprland layout plugin providing a scrolling layout like PaperWM";
+    license = lib.licenses.mit;
+    #maintainers = builtins.attrValues { inherit (lib.maintainers) unixpariah; };
+    platforms = lib.platforms.linux;
+  };
+}

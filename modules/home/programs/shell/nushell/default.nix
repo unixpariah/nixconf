@@ -8,8 +8,13 @@
 {
   config = lib.mkIf (shell == "nushell") {
     home = {
-      #packages = builtins.attrValues { inherit (pkgs) nufmt; };
-      # nufmt is very WIP, idk why its even in nixpkgs
+      packages = builtins.attrValues {
+        inherit (pkgs)
+          # nufmt is very WIP, idk why its even in nixpkgs
+          #nufmt
+          inshellisense
+          ;
+      };
       persist.files = [ ".config/nushell/history.txt" ];
     };
     programs = {
@@ -17,32 +22,26 @@
         enable = true;
         package = pkgs.nushell;
         inherit (config.home) shellAliases;
-        extraConfig = ''
-          let carapace_completer = {|spans: list<string>|
-              ${pkgs.carapace}/bin/carapace $spans.0 nushell ...$spans
-              | from json
-              | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+
+        plugins = builtins.attrValues { inherit (pkgs.nushellPlugins) highlight; };
+
+        configFile.text = ''
+          let carapace_completer = {|spans|
+              ${config.programs.carapace.package}/bin/carapace $spans.0 nushell ...$spans | from json
           }
 
-          let external_completer = {|spans|
-              let expanded_alias = scope aliases
-              | where name == $spans.0
-              | get 0.expansion
-              let spans = if $expanded_alias != null {
-                  $spans
-                  | skip 1
-                  | prepend ($expanded_alias | split row ' ' | take 1)
-              } else {
-                  $spans
-              }
-              match $spans.0 {
-                  * => $carapace_completer
-              } | do $in $spans
-          }
           $env.config = {
+            ls: {
+              clickable_links: true
+            }
+
+            rm: {
+              always_trash: true
+            }
 
             show_banner: false
             edit_mode: "vi"
+
             completions: {
               algorithm: "fuzzy"
               case_sensitive: false
@@ -52,7 +51,7 @@
               external: {
                 enable: true
                 max_results: 100
-                completer: $external_completer
+                completer: $carapace_completer
               }
             }
             cursor_shape: {
@@ -72,6 +71,7 @@
             render_right_prompt_on_last_line: false
           }
         '';
+
         extraEnv = ''
           $env.TRANSIENT_PROMPT_COMMAND = ">"
           $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'

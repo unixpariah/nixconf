@@ -19,7 +19,10 @@ in
   };
 
   config = {
-    nixGL.packages = inputs.nixGL.packages;
+    nixGL = {
+      packages = inputs.nixGL.packages;
+      vulkan.enable = true;
+    };
 
     nixpkgs.overlays = lib.mkAfter [
       (

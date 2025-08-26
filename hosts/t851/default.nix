@@ -10,10 +10,8 @@
     };
   };
 
-  networking.wireless.iwd.enable = true;
-
   environment = {
-    systemPackages = builtins.attrValues { inherit (pkgs) pamtester iwd; };
+    systemPackages = builtins.attrValues { inherit (pkgs) pamtester; };
 
     etc = {
       "pam.d/hyprlock".text = ''

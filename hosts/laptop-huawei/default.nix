@@ -9,6 +9,16 @@
     ./disko.nix
   ];
 
+  sops.secrets = {
+    nixos-anywhere = {
+      owner = "nixos-anywhere";
+      group = "nixos-anywhere";
+      mode = "0400";
+    };
+  };
+
+  programs.nixos-anywhere.sshKeyFile = config.sops.secrets.nixos-anywhere.path;
+
   services = {
     sccache.enable = true;
   };

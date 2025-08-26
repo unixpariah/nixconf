@@ -25,10 +25,10 @@ in
         inherit (cfg) email;
       };
 
-      signing = {
+      signing = lib.mkIf (cfg.signingKeyFile != null) {
         behavior = "own";
         backend = "ssh";
-        key = lib.mkIf (cfg.signingKeyFile != null) cfg.signingKeyFile;
+        key = cfg.signingKeyFile;
         backends.ssh.allow-singers = "${config.home.homeDirectory}/.ssh/allowed_signers";
       };
 

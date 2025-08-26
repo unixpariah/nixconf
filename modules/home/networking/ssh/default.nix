@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   ...
 }:
@@ -8,11 +7,19 @@
   services.ssh-agent.enable = true;
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
     matchBlocks."*" = {
-      hashKnownHosts = true;
+      forwardAgent = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      compression = false;
       addKeysToAgent = "yes";
-      userKnownHostsFile = lib.mkIf config.services.impermanence.enable "~/.ssh/custom_known_hosts/known_hosts";
+      userKnownHostsFile =
+        if config.services.impermanence.enable then
+          "~/.ssh/persisted/known_hosts"
+        else
+          "~/.ssh/known_hosts";
 
       controlMaster = "auto";
       controlPath = "~/.ssh/sockets/S.%r@%h:%p";
@@ -47,7 +54,7 @@
   };
 
   home = {
-    persist.directories = [ ".ssh/custom_known_hosts" ];
+    persist.directories = [ ".ssh/persisted" ];
     file = {
       ".ssh/config.d/.keep".text = "# Managed by Home Manager";
       ".ssh/sockets/.keep".text = "# Managed by Home Manager";
