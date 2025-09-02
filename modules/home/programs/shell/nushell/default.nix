@@ -35,10 +35,6 @@
               clickable_links: true
             }
 
-            rm: {
-              always_trash: true
-            }
-
             show_banner: false
             edit_mode: "vi"
 

@@ -28,7 +28,11 @@ in
     services = {
       upower.enable = true;
       tlp = {
-        enable = true;
+        enable =
+          let
+            inherit (config.services.desktopManager) gnome cosmic plasma6;
+          in
+          !gnome.enable && !cosmic.enable && !plasma6.enable;
         settings = {
           CPU_SCALING_GOVERNOR_ON_AC = "performance";
           CPU_SCALING_GOVERNOR_ON_BAT = "powersave";

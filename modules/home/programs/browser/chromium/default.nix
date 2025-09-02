@@ -46,9 +46,7 @@ in
     home.persist = {
       files = [
         ".config/chromium/Local State"
-        ".config/chromium/Default/Bookmarks"
         ".config/chromium/Default/Cookies"
-        ".config/chromium/Default/Bookmarks"
       ];
       directories = [ ".config/chromium/Default/Local Storage" ];
     };

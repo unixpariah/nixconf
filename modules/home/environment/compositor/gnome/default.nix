@@ -24,13 +24,6 @@ with lib.hm.gvariant;
       ];
     };
 
-    home.packages = builtins.attrValues {
-      inherit (pkgs)
-        # Using wl-clipboard-rs on environments made for humans
-        wl-clipboard
-        ;
-    };
-
     ### EXTENSIONS ###
     dconf.settings = {
       "org/gnome/shell" = {
@@ -207,10 +200,6 @@ with lib.hm.gvariant;
         move-to-workspace-right = [ "<Shift><Alt>l" ];
         switch-to-workspace-left = [ "<Alt>h" ];
         switch-to-workspace-right = [ "<Alt>l" ];
-      };
-
-      "org/gnome/eog/view" = {
-        background-color = "#1e1e2e";
       };
 
       "org/gnome/evolution-data-server" = {

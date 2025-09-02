@@ -11,16 +11,6 @@ _: {
           t851.id = "YP57GK4-TGH3N6K-S46QN4A-F5XV63N-OTO6S5E-CGPVU4N-TXPLLR5-FWNKDAE";
         };
         folders = {
-          "/var/lib/nixconf" = {
-            path = "/var/lib/nixconf";
-            devices = [
-              "laptop"
-              "laptop-huawei"
-              "agent-0"
-              "server-0"
-              "t851"
-            ];
-          };
           "~/Documents" = {
             path = "~/Documents";
             devices = [

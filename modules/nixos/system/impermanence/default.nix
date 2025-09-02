@@ -8,6 +8,7 @@
 }:
 let
   cfg = config.services.impermanence;
+  inherit (lib) types;
 in
 {
   imports = [ inputs.impermanence.nixosModules.impermanence ];
@@ -29,48 +30,21 @@ in
     environment.persist = {
       users = {
         files = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
+          type = types.listOf types.str;
           default = [ ];
         };
 
         directories = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
+          type = types.listOf types.anything;
           default = [ ];
         };
       };
       directories = lib.mkOption {
-        type = lib.types.listOf (
-          lib.types.either lib.types.str (
-            lib.types.submodule {
-              options = {
-                directory = lib.mkOption {
-                  type = lib.types.str;
-                  default = null;
-                  description = "The directory path to be linked.";
-                };
-                user = lib.mkOption {
-                  type = lib.types.str;
-                  default = null;
-                  description = "User owning the directory";
-                };
-                group = lib.mkOption {
-                  type = lib.types.str;
-                  default = null;
-                  description = "Group owning the directory";
-                };
-                mode = lib.mkOption {
-                  type = lib.types.str;
-                  default = null;
-                  description = "Permissions";
-                };
-              };
-            }
-          )
-        );
+        type = types.listOf types.anything;
         default = [ ];
       };
       files = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
+        type = types.listOf types.anything;
         default = [ ];
       };
     };
@@ -173,7 +147,6 @@ in
     };
 
     systemd.services.activate-home-manager = {
-      inherit (config.services.impermanence) enable;
       description = "Activate home manager";
       wantedBy = [ "default.target" ];
       requiredBy = [ "systemd-user-sessions.service" ];

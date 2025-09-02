@@ -12,7 +12,7 @@ in
       enable = true;
       time = {
         enable = true;
-        format = "DD.MM.YYY";
+        format = "%d.%m.%Y";
       };
       greeting = {
         enable = true;

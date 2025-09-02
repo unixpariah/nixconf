@@ -69,6 +69,7 @@
   };
 
   networking = {
+    #nameservers = [ "192.168.1.103" ];
     hostId = "499673df";
     wireless = {
       iwd.enable = true;
@@ -78,10 +79,6 @@
 
   system = {
     fileSystem = "zfs";
-    bootloader = {
-      variant = "limine";
-      silent = true;
-    };
     ydotool.enable = true;
   };
 
@@ -125,11 +122,11 @@
     enable = true;
     pihole = {
       domain = "pihole.your-domain.com";
-      dns = "192.168.30.1";
+      dns = "192.168.1.1";
       passwordFile = config.sops.secrets."pihole/password".path;
       adlists = [ "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt" ];
-      webLoadBalancerIP = "192.168.30.102";
-      dnsLoadBalancerIP = "192.168.30.103";
+      webLoadBalancerIP = "192.168.1.102";
+      dnsLoadBalancerIP = "192.168.1.103";
     };
     grafana = {
       enable = true;

@@ -2,7 +2,6 @@
   pkgs,
   inputs,
   lib,
-  profile,
   config,
   ...
 }:
@@ -18,7 +17,6 @@ in
   home.packages = lib.mkIf cfg.enable [ pkgs.xwayland-satellite ];
 
   programs.niri = {
-    enable = lib.mkDefault (profile == "desktop");
     package = pkgs.niri-unstable;
     settings = {
       input = {

@@ -28,6 +28,7 @@
       variant = "tmux";
     };
     vesktop.enable = true;
+    firefox.enable = true;
     chromium.enable = true;
     fastfetch.enable = true;
     starship.enable = true;

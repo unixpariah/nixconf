@@ -2,30 +2,21 @@
   lib,
   config,
   profile,
+  platform,
   ...
 }:
 let
   cfg = config.system.bootloader;
+  inherit (lib) types;
 in
 {
   options.system.bootloader = {
-    silent = lib.mkEnableOption "silent boot";
-    variant = lib.mkOption {
-      type = lib.types.enum [
-        "grub"
-        "systemd-boot"
-        "limine"
-        "none"
-      ];
+    silent = lib.mkOption {
+      type = types.bool;
+      default = profile == "desktop";
     };
     legacy = lib.mkEnableOption "legacy boot";
   };
-
-  imports = [
-    ./systemd-boot.nix
-    ./grub.nix
-    ./limine.nix
-  ];
 
   config = {
     boot = {
@@ -35,7 +26,15 @@ in
         supportedFilesystems = [ config.system.fileSystem ];
       };
       plymouth.enable = profile == "desktop" && config.stylix.enable;
-      loader.systemd-boot.enable = lib.mkDefault false;
+      loader = {
+        limine = {
+          enable = platform == "nixos";
+          enableEditor = true;
+          biosSupport = cfg.legacy;
+          biosDevice = lib.mkIf (!cfg.legacy) "nodev";
+        };
+        systemd-boot.enable = false;
+      };
       supportedFilesystems = [ config.system.fileSystem ];
       kernelModules = [ "v4l2loopback" ];
 

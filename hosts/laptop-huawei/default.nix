@@ -29,7 +29,6 @@
 
   system = {
     bootloader = {
-      variant = "limine";
       silent = true;
     };
     fileSystem = "zfs";

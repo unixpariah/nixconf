@@ -28,7 +28,6 @@
   };
 
   system = {
-    bootloader.variant = "systemd-boot";
     fileSystem = "zfs";
   };
 

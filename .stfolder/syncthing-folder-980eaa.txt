@@ -1,5 +1,0 @@
-# This directory is a Syncthing folder marker.
-# Do not delete.
-
-folderID: /var/lib/nixconf
-created: 2025-05-25T13:56:00+02:00

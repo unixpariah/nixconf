@@ -1,17 +1,12 @@
 {
   config,
   lib,
-  profile,
   ...
 }:
 let
   cfg = config.programs.hyprland;
 in
 {
-  programs.hyprland = {
-    enable = lib.mkDefault (profile == "desktop");
-  };
-
   nix.settings = lib.mkIf cfg.enable {
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [ "https://hyprland.cachix.org" ];

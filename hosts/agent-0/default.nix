@@ -10,10 +10,7 @@
   };
 
   system = {
-    bootloader = {
-      variant = "grub";
-      legacy = true;
-    };
+    bootloader.legacy = true;
     fileSystem = "zfs";
   };
 

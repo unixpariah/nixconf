@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  profile,
   platform,
   ...
 }:
@@ -12,10 +11,7 @@ let
 in
 {
   options.programs.hyprland = {
-    enable = lib.mkOption {
-      type = types.bool;
-      default = profile == "desktop";
-    };
+    enable = lib.mkEnableOption "hyprland";
     package = lib.mkOption {
       type = types.package;
       default = if platform == "non-nixos" then (config.lib.nixGL.wrap pkgs.hyprland) else pkgs.hyprland;

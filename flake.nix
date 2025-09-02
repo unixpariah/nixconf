@@ -115,7 +115,7 @@
               specialArgs = {
                 inherit inputs;
                 systemUsers = attrs.users;
-                inherit (config.hosts.${hostName}) system profile;
+                inherit (config.hosts.${hostName}) system profile platform;
               };
               modules = [
                 ./modules/nixos

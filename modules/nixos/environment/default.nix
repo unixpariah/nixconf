@@ -36,7 +36,7 @@
         enable = true;
         xdgOpenUsePortal = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-        wlr.enable = true;
+        wlr = { inherit (config.programs.sway) enable; };
 
         config = {
           niri = {
@@ -52,12 +52,6 @@
           Hyprland = {
             default = [
               "hyprland"
-              "gtk"
-            ];
-          };
-          sway = {
-            default = lib.mkForce [
-              "wlr"
               "gtk"
             ];
           };
