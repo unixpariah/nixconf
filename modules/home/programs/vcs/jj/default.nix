@@ -30,6 +30,8 @@ in
         backends.ssh.allow-singers = "${config.home.homeDirectory}/.ssh/allowed_signers";
       };
 
+      gerrit.default-remote-branch = "main";
+
       git.push-new-bookmarks = true;
 
       home.shellAliases.jj = "jj --ignore-immutable";
